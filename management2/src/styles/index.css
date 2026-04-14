@@ -1,0 +1,33 @@
+/* ========================================
+   样式系统主入口文件
+   采用分层架构：基础层 -> 布局层 -> 组件层 -> 工具类
+   ======================================== */
+
+/* 基础层：重置、字体、色值、滚动条等全局样式 */
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/scrollbar.css';
+
+/* 布局层：页面整体布局、栅格系统 */
+@import './layout/main-layout.css';
+@import './layout/sidebar.css';
+@import './layout/header.css';
+@import './layout/content.css';
+
+/* 组件层：可复用的UI组件样式 */
+/* 注释掉未使用的组件样式，减少CSS体积 */
+/* @import './components/buttons.css'; */ /* 未使用：项目使用Element Plus按钮 */
+/* @import './components/forms.css'; */ /* 未使用：项目使用Element Plus表单组件 */
+/* @import './components/tables.css'; */ /* 未使用：项目使用Element Plus表格组件 */
+/* @import './components/cards.css'; */ /* 未使用：项目使用Element Plus卡片组件 */
+/* @import './components/tags.css'; */ /* 未使用：项目使用Element Plus标签组件 */
+/* @import './components/navigation.css'; */ /* 未使用：导航样式在layout中定义 */
+/* @import './components/dropdown.css'; */ /* 未使用：项目使用Element Plus下拉组件 */
+
+/* 工具类：小范围复用的辅助样式 */
+/* @import './utilities/spacing.css'; */ /* 大量未使用的间距工具类，暂时注释 */
+@import './utilities/text.css';
+/* @import './utilities/display.css'; */ /* 大量未使用的显示工具类，暂时注释 */
+
+/* Element Plus 样式覆盖 */
+@import './overrides/element-plus.css';

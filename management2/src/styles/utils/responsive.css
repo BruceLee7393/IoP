@@ -1,0 +1,242 @@
+/* 响应式工具类  */
+
+/* ========== 响应式容器 ========== */
+.responsive-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========== 弹性布局工具类 ========== */
+.flex-container {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.flex-container.wrap {
+  flex-wrap: wrap;
+}
+
+.flex-container.column {
+  flex-direction: column;
+}
+
+.flex-item {
+  flex: 1;
+  min-width: 0; /* 关键：允许收缩 */
+}
+
+.flex-item.auto {
+  flex: 0 0 auto;
+}
+
+.flex-item.grow {
+  flex-grow: 1;
+}
+
+.flex-item.shrink {
+  flex-shrink: 1;
+}
+
+/* 响应式弹性布局 */
+@media (max-width: 768px) {
+  .flex-container:not(.column) {
+    flex-direction: column;
+  }
+
+  .flex-item {
+    flex: none;
+    width: 100%;
+  }
+}
+
+/* ========== 网格布局工具类 ========== */
+.responsive-grid {
+  display: grid;
+  gap: 24px;
+  width: 100%;
+}
+
+
+
+
+/* ========== 表格响应式 ========== */
+.responsive-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table {
+  width: 100%;
+  min-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .responsive-table {
+    min-width: 500px;
+  }
+
+  .responsive-table-container {
+    margin: 0 -16px;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+/* ========== 按钮组响应式 ========== */
+.button-group {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.button-group.justify-end {
+  justify-content: flex-end;
+}
+
+.button-group.justify-center {
+  justify-content: center;
+}
+
+.button-group.justify-between {
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .button-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .button-group .el-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .button-group.justify-end,
+  .button-group.justify-center,
+  .button-group.justify-between {
+    justify-content: stretch;
+  }
+}
+
+/* ========== 间距响应式 ========== */
+.spacing-responsive {
+  padding: 24px;
+}
+
+@media (max-width: 768px) {
+  .spacing-responsive {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spacing-responsive {
+    padding: 12px;
+  }
+}
+
+/* ========== 隐藏/显示工具类 ========== */
+.hidden-mobile {
+  display: block;
+}
+
+.hidden-desktop {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  }
+
+  .hidden-desktop {
+    display: block;
+  }
+}
+
+/* ========== 开发者工具适配 ========== */
+/* 当视口宽度在1000-1200px之间时（通常是开启开发者工具的情况） */
+@media (min-width: 769px) and (max-width: 1200px) {
+  .dev-tools-adaptive {
+    /* 在开发者工具开启时自动调整布局 */
+    padding: 16px;
+  }
+  
+  .dev-tools-adaptive .el-table {
+    font-size: 13px; /* 稍微缩小字体以适应窄屏 */
+  }
+  
+  .dev-tools-adaptive .el-button {
+    padding: 6px 12px; /* 缩小按钮尺寸 */
+    font-size: 13px;
+  }
+}
+
+/* 极窄视口适配（开发者工具 + 高缩放） */
+@media (min-width: 769px) and (max-width: 900px) {
+  .dev-tools-adaptive {
+    padding: 12px;
+  }
+  
+  .dev-tools-adaptive .query-card {
+    margin-bottom: 12px;
+  }
+  
+  .dev-tools-adaptive .el-form-item {
+    margin-bottom: 12px;
+  }
+}
+
+/* ========== 缩放适配 ========== */
+/* 高缩放比例下的字体和间距调整 */
+@media (min-resolution: 1.5dppx) {
+  .scale-adaptive {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .scale-adaptive .el-button {
+    min-height: 32px;
+  }
+  
+  .scale-adaptive .el-input__wrapper {
+    min-height: 32px;
+  }
+}
+
+/* ========== 容器最大宽度管理 ========== */
+.container-fluid {
+  width: 100%;
+  padding: 0 16px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.container-wide {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 768px) {
+  .container-fluid,
+  .container,
+  .container-wide {
+    padding: 0 12px;
+  }
+}

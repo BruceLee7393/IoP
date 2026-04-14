@@ -1,0 +1,384 @@
+/* ========================================
+   下拉菜单组件样式
+   用户下拉菜单、操作下拉菜单等
+   ======================================== */
+
+/* 下拉菜单容器 */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* 下拉触发器 */
+.dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* 下拉菜单 */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 160px;
+  padding: 8px 0;
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #1A202C;
+  text-align: left;
+  background-color: #FFFFFF;
+  background-clip: padding-box;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 150ms ease;
+}
+
+.dropdown.is-open .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 下拉菜单右对齐 */
+.dropdown-menu.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
+/* 下拉菜单向上展开 */
+.dropdown-menu.dropdown-menu-up {
+  top: auto;
+  bottom: 100%;
+  margin: 0 0 4px;
+  transform: translateY(8px);
+}
+
+.dropdown.is-open .dropdown-menu.dropdown-menu-up {
+  transform: translateY(0);
+}
+
+/* 下拉菜单项 */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 8px 16px;
+  clear: both;
+  font-weight: 400;
+  color: #1A202C;
+  text-align: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  color: #2B6CB0;
+  background-color: #EDF2F7;
+  text-decoration: none;
+  outline: none;
+}
+
+.dropdown-item:active {
+  color: #245A96;
+  background-color: #E2E8F0;
+}
+
+.dropdown-item.is-active {
+  color: #2B6CB0;
+  background-color: #EBF8FF;
+  font-weight: 500;
+}
+
+.dropdown-item:disabled,
+.dropdown-item.is-disabled {
+  color: #A0AEC0;
+  pointer-events: none;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+
+/* 下拉菜单项图标 */
+.dropdown-item-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* 下拉菜单项文本 */
+.dropdown-item-text {
+  flex: 1;
+  line-height: 1.4;
+}
+
+/* 下拉菜单项快捷键 */
+.dropdown-item-shortcut {
+  margin-left: auto;
+  padding-left: 16px;
+  font-size: 12px;
+  color: #A0AEC0;
+}
+
+/* 下拉菜单分隔线 */
+.dropdown-divider {
+  height: 0;
+  margin: 8px 0;
+  overflow: hidden;
+  border-top: 1px solid #E2E8F0;
+}
+
+/* 下拉菜单标题 */
+.dropdown-header {
+  display: block;
+  padding: 8px 16px 4px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4A5568;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+/* 用户下拉菜单特殊样式 */
+.user-dropdown-menu {
+  min-width: 200px;
+}
+
+.user-dropdown-menu .dropdown-item {
+  padding: 12px 16px;
+}
+
+.user-dropdown-menu .dropdown-item-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 16px;
+  margin-right: 12px;
+}
+
+/* 危险操作项 */
+.dropdown-item.is-danger {
+  color: #E53E3E;
+}
+
+.dropdown-item.is-danger:hover,
+.dropdown-item.is-danger:focus {
+  color: #FFFFFF;
+  background-color: #E53E3E;
+}
+
+.dropdown-item.is-danger:active {
+  background-color: #C53030;
+}
+
+/* 成功操作项 */
+.dropdown-item.is-success {
+  color: #38A169;
+}
+
+.dropdown-item.is-success:hover,
+.dropdown-item.is-success:focus {
+  color: #FFFFFF;
+  background-color: #38A169;
+}
+
+.dropdown-item.is-success:active {
+  background-color: #2F855A;
+}
+
+/* 下拉菜单箭头指示器 */
+.dropdown-arrow {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 4px;
+  font-size: 12px;
+  color: #A0AEC0;
+  transition: transform 150ms ease, color 150ms ease;
+}
+
+.dropdown.is-open .dropdown-arrow {
+  transform: rotate(180deg);
+  color: #2B6CB0;
+}
+
+/* 下拉菜单加载状态 */
+.dropdown-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: #4A5568;
+}
+
+.dropdown-loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #E2E8F0;
+  border-top: 2px solid #2B6CB0;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+/* 下拉菜单空状态 */
+.dropdown-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: #A0AEC0;
+  font-size: 13px;
+}
+
+/* 多级下拉菜单 */
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin: 0 0 0 4px;
+}
+
+.dropdown-submenu.dropdown-submenu-left .dropdown-menu {
+  right: 100%;
+  left: auto;
+  margin: 0 4px 0 0;
+}
+
+.dropdown-submenu-arrow {
+  margin-left: auto;
+  font-size: 12px;
+  color: #A0AEC0;
+}
+
+/* 下拉菜单搜索 */
+.dropdown-search {
+  padding: 8px 12px;
+  border-bottom: 1px solid #E2E8F0;
+  margin-bottom: 4px;
+}
+
+.dropdown-search-input {
+  width: 100%;
+  height: 32px;
+  padding: 0 8px;
+  border: 1px solid #E2E8F0;
+  border-radius: 4px;
+  font-size: 13px;
+  background-color: #F7FAFC;
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+.dropdown-search-input:focus {
+  border-color: #2B6CB0;
+  background-color: #FFFFFF;
+  outline: none;
+}
+
+.dropdown-search-input::placeholder {
+  color: #A0AEC0;
+}
+
+/* 响应式下拉菜单 */
+@media (max-width: 767px) {
+  .dropdown-menu {
+    position: fixed;
+    top: auto !important;
+    bottom: 0;
+    left: 0 !important;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    min-width: auto;
+    margin: 0;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(100%);
+  }
+  
+  .dropdown.is-open .dropdown-menu {
+    transform: translateY(0);
+  }
+  
+  .dropdown-item {
+    padding: 16px 20px;
+    font-size: 16px;
+  }
+  
+  .dropdown-item-icon {
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+    margin-right: 12px;
+  }
+  
+  .user-dropdown-menu .dropdown-item {
+    padding: 16px 20px;
+  }
+}
+
+/* 下拉菜单动画 */
+@keyframes dropdown-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dropdown-fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+/* 下拉菜单遮罩（移动端） */
+.dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 150ms ease;
+}
+
+.dropdown.is-open .dropdown-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 768px) {
+  .dropdown-backdrop {
+    display: none;
+  }
+}

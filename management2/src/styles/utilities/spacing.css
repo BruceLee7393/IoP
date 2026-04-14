@@ -1,0 +1,167 @@
+/* ========================================
+   间距工具类
+   基于4px网格的边距和内边距工具类
+   ======================================== */
+
+/* 外边距工具类 */
+.m-0 { margin: 0 !important; }
+.m-1 { margin: 4px !important; }
+.m-2 { margin: 8px !important; }
+.m-3 { margin: 12px !important; }
+.m-4 { margin: 16px !important; }
+.m-5 { margin: 20px !important; }
+.m-6 { margin: 24px !important; }
+.m-8 { margin: 32px !important; }
+
+/* 水平外边距 */
+.mx-0 { margin-left: 0 !important; margin-right: 0 !important; }
+.mx-1 { margin-left: 4px !important; margin-right: 4px !important; }
+.mx-2 { margin-left: 8px !important; margin-right: 8px !important; }
+.mx-3 { margin-left: 12px !important; margin-right: 12px !important; }
+.mx-4 { margin-left: 16px !important; margin-right: 16px !important; }
+.mx-5 { margin-left: 20px !important; margin-right: 20px !important; }
+.mx-6 { margin-left: 24px !important; margin-right: 24px !important; }
+.mx-8 { margin-left: 32px !important; margin-right: 32px !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+/* 垂直外边距 */
+.my-0 { margin-top: 0 !important; margin-bottom: 0 !important; }
+.my-1 { margin-top: 4px !important; margin-bottom: 4px !important; }
+.my-2 { margin-top: 8px !important; margin-bottom: 8px !important; }
+.my-3 { margin-top: 12px !important; margin-bottom: 12px !important; }
+.my-4 { margin-top: 16px !important; margin-bottom: 16px !important; }
+.my-5 { margin-top: 20px !important; margin-bottom: 20px !important; }
+.my-6 { margin-top: 24px !important; margin-bottom: 24px !important; }
+.my-8 { margin-top: 32px !important; margin-bottom: 32px !important; }
+
+/* 单方向外边距 */
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: 4px !important; }
+.mt-2 { margin-top: 8px !important; }
+.mt-3 { margin-top: 12px !important; }
+.mt-4 { margin-top: 16px !important; }
+.mt-5 { margin-top: 20px !important; }
+.mt-6 { margin-top: 24px !important; }
+.mt-8 { margin-top: 32px !important; }
+
+.mr-0 { margin-right: 0 !important; }
+.mr-1 { margin-right: 4px !important; }
+.mr-2 { margin-right: 8px !important; }
+.mr-3 { margin-right: 12px !important; }
+.mr-4 { margin-right: 16px !important; }
+.mr-5 { margin-right: 20px !important; }
+.mr-6 { margin-right: 24px !important; }
+.mr-8 { margin-right: 32px !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 4px !important; }
+.mb-2 { margin-bottom: 8px !important; }
+.mb-3 { margin-bottom: 12px !important; }
+.mb-4 { margin-bottom: 16px !important; }
+.mb-5 { margin-bottom: 20px !important; }
+.mb-6 { margin-bottom: 24px !important; }
+.mb-8 { margin-bottom: 32px !important; }
+
+.ml-0 { margin-left: 0 !important; }
+.ml-1 { margin-left: 4px !important; }
+.ml-2 { margin-left: 8px !important; }
+.ml-3 { margin-left: 12px !important; }
+.ml-4 { margin-left: 16px !important; }
+.ml-5 { margin-left: 20px !important; }
+.ml-6 { margin-left: 24px !important; }
+.ml-8 { margin-left: 32px !important; }
+
+/* 内边距工具类 */
+.p-0 { padding: 0 !important; }
+.p-1 { padding: 4px !important; }
+.p-2 { padding: 8px !important; }
+.p-3 { padding: 12px !important; }
+.p-4 { padding: 16px !important; }
+.p-5 { padding: 20px !important; }
+.p-6 { padding: 24px !important; }
+.p-8 { padding: 32px !important; }
+
+/* 水平内边距 */
+.px-0 { padding-left: 0 !important; padding-right: 0 !important; }
+.px-1 { padding-left: 4px !important; padding-right: 4px !important; }
+.px-2 { padding-left: 8px !important; padding-right: 8px !important; }
+.px-3 { padding-left: 12px !important; padding-right: 12px !important; }
+.px-4 { padding-left: 16px !important; padding-right: 16px !important; }
+.px-5 { padding-left: 20px !important; padding-right: 20px !important; }
+.px-6 { padding-left: 24px !important; padding-right: 24px !important; }
+.px-8 { padding-left: 32px !important; padding-right: 32px !important; }
+
+/* 垂直内边距 */
+.py-0 { padding-top: 0 !important; padding-bottom: 0 !important; }
+.py-1 { padding-top: 4px !important; padding-bottom: 4px !important; }
+.py-2 { padding-top: 8px !important; padding-bottom: 8px !important; }
+.py-3 { padding-top: 12px !important; padding-bottom: 12px !important; }
+.py-4 { padding-top: 16px !important; padding-bottom: 16px !important; }
+.py-5 { padding-top: 20px !important; padding-bottom: 20px !important; }
+.py-6 { padding-top: 24px !important; padding-bottom: 24px !important; }
+.py-8 { padding-top: 32px !important; padding-bottom: 32px !important; }
+
+/* 单方向内边距 */
+.pt-0 { padding-top: 0 !important; }
+.pt-1 { padding-top: 4px !important; }
+.pt-2 { padding-top: 8px !important; }
+.pt-3 { padding-top: 12px !important; }
+.pt-4 { padding-top: 16px !important; }
+.pt-5 { padding-top: 20px !important; }
+.pt-6 { padding-top: 24px !important; }
+.pt-8 { padding-top: 32px !important; }
+
+.pr-0 { padding-right: 0 !important; }
+.pr-1 { padding-right: 4px !important; }
+.pr-2 { padding-right: 8px !important; }
+.pr-3 { padding-right: 12px !important; }
+.pr-4 { padding-right: 16px !important; }
+.pr-5 { padding-right: 20px !important; }
+.pr-6 { padding-right: 24px !important; }
+.pr-8 { padding-right: 32px !important; }
+
+.pb-0 { padding-bottom: 0 !important; }
+.pb-1 { padding-bottom: 4px !important; }
+.pb-2 { padding-bottom: 8px !important; }
+.pb-3 { padding-bottom: 12px !important; }
+.pb-4 { padding-bottom: 16px !important; }
+.pb-5 { padding-bottom: 20px !important; }
+.pb-6 { padding-bottom: 24px !important; }
+.pb-8 { padding-bottom: 32px !important; }
+
+.pl-0 { padding-left: 0 !important; }
+.pl-1 { padding-left: 4px !important; }
+.pl-2 { padding-left: 8px !important; }
+.pl-3 { padding-left: 12px !important; }
+.pl-4 { padding-left: 16px !important; }
+.pl-5 { padding-left: 20px !important; }
+.pl-6 { padding-left: 24px !important; }
+.pl-8 { padding-left: 32px !important; }
+
+/* 间隙工具类 */
+.gap-0 { gap: 0 !important; }
+.gap-1 { gap: 4px !important; }
+.gap-2 { gap: 8px !important; }
+.gap-3 { gap: 12px !important; }
+.gap-4 { gap: 16px !important; }
+.gap-5 { gap: 20px !important; }
+.gap-6 { gap: 24px !important; }
+.gap-8 { gap: 32px !important; }
+
+.gap-x-0 { column-gap: 0 !important; }
+.gap-x-1 { column-gap: 4px !important; }
+.gap-x-2 { column-gap: 8px !important; }
+.gap-x-3 { column-gap: 12px !important; }
+.gap-x-4 { column-gap: 16px !important; }
+.gap-x-5 { column-gap: 20px !important; }
+.gap-x-6 { column-gap: 24px !important; }
+.gap-x-8 { column-gap: 32px !important; }
+
+.gap-y-0 { row-gap: 0 !important; }
+.gap-y-1 { row-gap: 4px !important; }
+.gap-y-2 { row-gap: 8px !important; }
+.gap-y-3 { row-gap: 12px !important; }
+.gap-y-4 { row-gap: 16px !important; }
+.gap-y-5 { row-gap: 20px !important; }
+.gap-y-6 { row-gap: 24px !important; }
+.gap-y-8 { row-gap: 32px !important; }

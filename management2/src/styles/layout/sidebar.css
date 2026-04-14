@@ -1,0 +1,258 @@
+/* ========================================
+   侧边栏样式
+   左侧固定导航栏，支持展开/收起
+   ======================================== */
+
+/* 侧边栏容器  */
+.modern-sidebar {
+  width: var(--sidebar-width);
+  background: #FFFFFF;
+  border-right: 1px solid #E2E8F0;
+  box-shadow: 1px 0 3px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: width var(--transition-base);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+/* 侧边栏收起状态 */
+.modern-sidebar.collapsed {
+  width: var(--sidebar-collapsed-width);
+}
+
+/* Logo区域 */
+.logo-section {
+  height: 64px;
+  padding: 12px 16px;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.logo-svg {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.logo-text {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #1A202C;
+}
+
+/* Logo文字动画 */
+.logo-text-enter-active,
+.logo-text-leave-active {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.logo-text-enter-from,
+.logo-text-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+/* 导航菜单区域 */
+.navigation-menu {
+  flex: 1;
+  overflow: hidden;
+}
+
+.menu-scrollbar {
+  height: 100%;
+}
+
+/* 侧边栏底部 */
+.sidebar-footer {
+  padding: 16px;
+  border-top: 1px solid #E2E8F0;
+  background: #FFFFFF;
+}
+
+.collapse-trigger {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+  color: #4A5568;
+  font-size: 13px;
+}
+
+.collapse-trigger:hover {
+  background-color: #EDF2F7;
+  color: #2D3748;
+}
+
+.collapse-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.collapse-text-enter-active,
+.collapse-text-leave-active {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.collapse-text-enter-from,
+.collapse-text-leave-to {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+/* 响应式侧边栏 - 参考优秀项目的设计 */
+@media (max-width: 768px) {
+  .modern-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform var(--transition-base);
+  }
+
+  .modern-sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+
+  .main-container {
+    margin-left: 0;
+  }
+}
+
+/* 开发者工具适配 - 当视口宽度受限时自动收窄侧边栏 */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .modern-sidebar:not(.collapsed) {
+    width: 200px; /* 在中等宽度下收窄侧边栏 */
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 769px) {
+  .modern-sidebar:not(.collapsed) {
+    width: 180px; /* 在较窄宽度下进一步收窄 */
+  }
+}
+
+/* 遮罩层（移动端） */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 200ms ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (min-width: 992px) {
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+
+
+/* 侧边栏状态指示器 */
+.sidebar-status {
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  width: 12px;
+  height: 12px;
+  background: #2B6CB0;
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.modern-sidebar:hover .sidebar-status {
+  opacity: 1;
+}
+
+/* 收起状态下的提示 */
+.collapsed .tooltip-trigger {
+  position: relative;
+}
+
+.collapsed .tooltip-trigger:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 12px;
+  padding: 6px 12px;
+  background: #1A202C;
+  color: #FFFFFF;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1001;
+  opacity: 0;
+  animation: tooltipFadeIn 200ms ease forwards;
+}
+
+.collapsed .tooltip-trigger:hover::before {
+  content: "";
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 6px;
+  border: 6px solid transparent;
+  border-right-color: #1A202C;
+  z-index: 1001;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50%) translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}

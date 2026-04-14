@@ -1,0 +1,124 @@
+/* ========================================
+   滚动条样式
+   统一滚动条外观，使用更粗的滚动条（12-14px）
+   ======================================== */
+
+/* Webkit浏览器滚动条样式 */
+::-webkit-scrollbar {
+  width: 14px; /* 垂直滚动条宽度 */
+  height: 14px; /* 水平滚动条高度 */
+}
+
+::-webkit-scrollbar-track {
+  background: #EDF2F7; /* 轨道颜色 */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E0; /* 滑块颜色 */
+  border-radius: 8px;
+  border: 2px solid #EDF2F7; /* 滑块边框，与轨道同色 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A0AEC0; /* 滑块悬停颜色 */
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #718096; /* 滑块按下颜色 */
+}
+
+::-webkit-scrollbar-corner {
+  background: #EDF2F7; /* 滚动条交汇处颜色 */
+}
+
+/* Firefox滚动条样式 */
+* {
+  scrollbar-width: thick; /* 使用粗滚动条 */
+  scrollbar-color: #CBD5E0 #EDF2F7; /* 滑块颜色 轨道颜色 */
+}
+
+/* 细滚动条变体（用于特定组件） */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #F7FAFC;
+  border-radius: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 4px;
+  border: 1px solid #F7FAFC;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E0;
+}
+
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: #E2E8F0 #F7FAFC;
+}
+
+/* 隐藏滚动条（保持滚动功能） */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* IE和Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome、Safari、Opera */
+}
+
+/* 侧边栏专用滚动条样式 */
+.sidebar-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border-radius: 3px;
+}
+
+.sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E0;
+}
+
+.sidebar-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #E2E8F0 transparent;
+}
+
+/* 表格内容区滚动条 */
+.table-scrollbar::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+.table-scrollbar::-webkit-scrollbar-track {
+  background: #F7FAFC;
+  border-radius: 6px;
+}
+
+.table-scrollbar::-webkit-scrollbar-thumb {
+  background: #CBD5E0;
+  border-radius: 6px;
+  border: 2px solid #F7FAFC;
+}
+
+.table-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #A0AEC0;
+}
+
+.table-scrollbar {
+  scrollbar-width: auto;
+  scrollbar-color: #CBD5E0 #F7FAFC;
+}

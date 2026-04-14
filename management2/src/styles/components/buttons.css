@@ -1,0 +1,324 @@
+/* ========================================
+   按钮组件样式
+   定义各种按钮类型和状态
+   ======================================== */
+
+/* 按钮基础样式 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: all 150ms ease;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 按钮尺寸 */
+.btn-sm {
+  height: 32px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.btn-lg {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 16px;
+}
+
+/* 主按钮 */
+.btn-primary {
+  background-color: #2B6CB0;
+  border-color: #2B6CB0;
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background-color: #245A96;
+  border-color: #245A96;
+  color: #FFFFFF;
+}
+
+.btn-primary:active {
+  background-color: #1F4E83;
+  border-color: #1F4E83;
+  color: #FFFFFF;
+}
+
+.btn-primary:disabled {
+  background-color: #A0AEC0;
+  border-color: #A0AEC0;
+  color: #EDF2F7;
+}
+
+/* 次要按钮 */
+.btn-secondary {
+  background-color: transparent;
+  border-color: #2B6CB0;
+  color: #2B6CB0;
+}
+
+.btn-secondary:hover {
+  background-color: #EBF8FF;
+  border-color: #2B6CB0;
+  color: #2B6CB0;
+}
+
+.btn-secondary:active {
+  background-color: #D3EAFE;
+  border-color: #245A96;
+  color: #245A96;
+}
+
+.btn-secondary:disabled {
+  background-color: transparent;
+  border-color: #A0AEC0;
+  color: #A0AEC0;
+}
+
+/* 文本按钮 */
+.btn-text {
+  background-color: transparent;
+  border-color: transparent;
+  color: #2B6CB0;
+  padding: 0 8px;
+}
+
+.btn-text:hover {
+  background-color: #EBF8FF;
+  color: #2B6CB0;
+}
+
+.btn-text:active {
+  background-color: #D3EAFE;
+  color: #245A96;
+}
+
+.btn-text:disabled {
+  background-color: transparent;
+  color: #A0AEC0;
+}
+
+/* 危险按钮 */
+.btn-danger {
+  background-color: #E53E3E;
+  border-color: #E53E3E;
+  color: #FFFFFF;
+}
+
+.btn-danger:hover {
+  background-color: #C53030;
+  border-color: #C53030;
+  color: #FFFFFF;
+}
+
+.btn-danger:active {
+  background-color: #9B2C2C;
+  border-color: #9B2C2C;
+  color: #FFFFFF;
+}
+
+.btn-danger:disabled {
+  background-color: #A0AEC0;
+  border-color: #A0AEC0;
+  color: #EDF2F7;
+}
+
+/* 成功按钮 */
+.btn-success {
+  background-color: #38A169;
+  border-color: #38A169;
+  color: #FFFFFF;
+}
+
+.btn-success:hover {
+  background-color: #2F855A;
+  border-color: #2F855A;
+  color: #FFFFFF;
+}
+
+.btn-success:active {
+  background-color: #276749;
+  border-color: #276749;
+  color: #FFFFFF;
+}
+
+/* 警告按钮 */
+.btn-warning {
+  background-color: #D69E2E;
+  border-color: #D69E2E;
+  color: #FFFFFF;
+}
+
+.btn-warning:hover {
+  background-color: #B7791F;
+  border-color: #B7791F;
+  color: #FFFFFF;
+}
+
+.btn-warning:active {
+  background-color: #975A16;
+  border-color: #975A16;
+  color: #FFFFFF;
+}
+
+/* 信息按钮 */
+.btn-info {
+  background-color: #3182CE;
+  border-color: #3182CE;
+  color: #FFFFFF;
+}
+
+.btn-info:hover {
+  background-color: #2C5AA0;
+  border-color: #2C5AA0;
+  color: #FFFFFF;
+}
+
+.btn-info:active {
+  background-color: #2A4365;
+  border-color: #2A4365;
+  color: #FFFFFF;
+}
+
+/* 按钮图标 */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 6px;
+}
+
+.btn-icon.btn-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.btn-icon.btn-lg {
+  width: 40px;
+  height: 40px;
+}
+
+/* 按钮组 */
+.btn-group {
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+.btn-group .btn {
+  position: relative;
+  flex: 1 1 auto;
+  border-radius: 0;
+  margin-left: -1px;
+}
+
+.btn-group .btn:first-child {
+  margin-left: 0;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.btn-group .btn:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.btn-group .btn:hover,
+.btn-group .btn:focus,
+.btn-group .btn:active {
+  z-index: 1;
+}
+
+/* 加载状态 */
+.btn.is-loading {
+  pointer-events: none;
+  position: relative;
+}
+
+.btn.is-loading::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: btn-spin 1s linear infinite;
+}
+
+@keyframes btn-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 按钮内图标间距 */
+.btn .btn-icon-left {
+  margin-right: 6px;
+}
+
+.btn .btn-icon-right {
+  margin-left: 6px;
+}
+
+/* 块级按钮 */
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* 圆形按钮 */
+.btn-circle {
+  border-radius: 50%;
+}
+
+/* 响应式按钮 */
+@media (max-width: 767px) {
+  .btn {
+    height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+  }
+  
+  .btn-sm {
+    height: 36px;
+    padding: 0 12px;
+    font-size: 13px;
+  }
+  
+  .btn-lg {
+    height: 44px;
+    padding: 0 20px;
+    font-size: 16px;
+  }
+}

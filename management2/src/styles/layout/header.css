@@ -1,0 +1,275 @@
+/* ========================================
+   顶部栏样式
+   固定顶部导航，包含面包屑和用户信息
+   ======================================== */
+
+/* 顶部栏容器 */
+.modern-header {
+  height: 64px;
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
+  position: relative;
+  z-index: 100;
+  flex-shrink: 0;
+}
+
+.header-content {
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 头部左侧 */
+.header-left {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+/* 菜单切换按钮 */
+.menu-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  border-radius: 6px;
+  background: transparent;
+  color: #4A5568;
+  transition: background-color 150ms ease, color 150ms ease;
+  cursor: pointer;
+}
+
+.menu-toggle-btn:hover {
+  background-color: #EDF2F7;
+  color: #2D3748;
+}
+
+.menu-toggle-btn:focus {
+  outline: 2px solid #2B6CB0;
+  outline-offset: 2px;
+}
+
+/* 面包屑导航 */
+.breadcrumb-nav {
+  flex: 1;
+  min-width: 0;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.breadcrumb-link {
+  color: #4A5568;
+  text-decoration: none;
+  transition: color 150ms ease;
+  padding: 4px 0;
+}
+
+.breadcrumb-link:hover {
+  color: #2B6CB0;
+  text-decoration: underline;
+}
+
+.breadcrumb-current {
+  color: #1A202C;
+  font-weight: 500;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+  color: #CBD5E0;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+/* 头部右侧 */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 搜索框（可选） */
+.header-search {
+  position: relative;
+  width: 240px;
+}
+
+.header-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 36px;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  background: #FFFFFF;
+  font-size: 14px;
+  color: #1A202C;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.header-search-input:focus {
+  border-color: #2B6CB0;
+  box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.1);
+}
+
+.header-search-input::placeholder {
+  color: #A0AEC0;
+}
+
+.header-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #A0AEC0;
+  font-size: 16px;
+}
+
+/* 通知按钮 */
+.notification-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  background: transparent;
+  color: #4A5568;
+  transition: background-color 150ms ease, color 150ms ease;
+  cursor: pointer;
+}
+
+.notification-btn:hover {
+  background-color: #EDF2F7;
+  color: #2D3748;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  background: #E53E3E;
+  border-radius: 50%;
+  border: 2px solid #FFFFFF;
+}
+
+/* 用户下拉菜单 */
+.user-dropdown {
+  cursor: pointer;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 150ms ease;
+}
+
+.user-profile:hover {
+  background-color: #EDF2F7;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin-right: 8px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A202C;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role {
+  font-size: 12px;
+  color: #4A5568;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-arrow {
+  color: #A0AEC0;
+  font-size: 12px;
+  transition: transform 150ms ease;
+}
+
+.user-dropdown.is-active .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* 响应式头部 */
+@media (max-width: 991px) {
+  .header-content {
+    padding: 0 16px;
+  }
+  
+  .header-search {
+    display: none; /* 平板和手机隐藏搜索框 */
+  }
+  
+  .user-info {
+    display: none; /* 小屏幕隐藏用户信息文字 */
+  }
+  
+  .user-profile {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header-content {
+    padding: 0 12px;
+  }
+  
+  .breadcrumb-nav {
+    display: none; /* 手机端隐藏面包屑 */
+  }
+  
+  .header-right {
+    gap: 8px;
+  }
+}

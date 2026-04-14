@@ -1,0 +1,378 @@
+/* ========================================
+   表格组件样式
+   数据表格、表头、行状态等
+   ======================================== */
+
+/* 表格容器 */
+.table-container {
+  background: #FFFFFF;
+  border-radius: 8px;
+  border: 1px solid #E2E8F0;
+  overflow: hidden;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 表格基础样式 */
+.table {
+  width: 100%;
+  margin-bottom: 0;
+  color: #1A202C;
+  vertical-align: top;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 16px;
+  vertical-align: middle;
+  border-bottom: 1px solid #E2E8F0;
+  text-align: left;
+}
+
+.table th {
+  font-weight: 600;
+  color: #2D3748;
+  background-color: #FFFFFF;
+  border-bottom: 2px solid #E2E8F0;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.table td {
+  font-weight: 400;
+  color: #1A202C;
+}
+
+/* 表格行样式 */
+.table tbody tr {
+  transition: background-color 150ms ease;
+}
+
+.table tbody tr:hover {
+  background-color: #F7FAFC;
+}
+
+.table tbody tr.is-selected {
+  background-color: #EBF8FF;
+}
+
+.table tbody tr.is-disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* 斑马纹表格 */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #F7FAFC;
+}
+
+.table-striped tbody tr:nth-of-type(odd):hover {
+  background-color: #EDF2F7;
+}
+
+/* 紧凑表格 */
+.table-sm th,
+.table-sm td {
+  padding: 8px 12px;
+}
+
+/* 表格边框 */
+.table-bordered {
+  border: 1px solid #E2E8F0;
+}
+
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #E2E8F0;
+}
+
+/* 无边框表格 */
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+  border: 0;
+}
+
+/* 表头固定 */
+.table-sticky-header {
+  position: relative;
+}
+
+.table-sticky-header thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #FFFFFF;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 表格排序 */
+.table-sortable th {
+  cursor: pointer;
+  position: relative;
+  padding-right: 32px;
+}
+
+.table-sortable th:hover {
+  background-color: #F7FAFC;
+}
+
+.table-sortable th::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #CBD5E0;
+  opacity: 0.5;
+}
+
+.table-sortable th.sort-asc::after {
+  border-bottom: 4px solid #2B6CB0;
+  border-top: none;
+  opacity: 1;
+}
+
+.table-sortable th.sort-desc::after {
+  border-top: 4px solid #2B6CB0;
+  border-bottom: none;
+  opacity: 1;
+}
+
+/* 表格操作列 */
+.table-actions {
+  white-space: nowrap;
+  width: 1%;
+}
+
+.table-actions .btn {
+  margin-right: 8px;
+}
+
+.table-actions .btn:last-child {
+  margin-right: 0;
+}
+
+/* 表格状态 */
+.table-status {
+  text-align: center;
+  padding: 48px 24px;
+  color: #4A5568;
+}
+
+.table-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.table-loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #E2E8F0;
+  border-top: 2px solid #2B6CB0;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 12px;
+}
+
+.table-empty {
+  text-align: center;
+  padding: 48px 24px;
+  color: #4A5568;
+}
+
+.table-empty-icon {
+  font-size: 48px;
+  color: #CBD5E0;
+  margin-bottom: 16px;
+}
+
+.table-empty-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2D3748;
+  margin-bottom: 8px;
+}
+
+.table-empty-description {
+  font-size: 14px;
+  color: #4A5568;
+  margin-bottom: 24px;
+}
+
+/* 表格分页 */
+.table-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-top: 1px solid #E2E8F0;
+  background-color: #F7FAFC;
+}
+
+.table-pagination-info {
+  font-size: 14px;
+  color: #4A5568;
+}
+
+.table-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 表格工具栏 */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #E2E8F0;
+  background-color: #FFFFFF;
+}
+
+.table-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.table-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.table-search {
+  position: relative;
+  width: 240px;
+}
+
+.table-search-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 36px;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  background: #FFFFFF;
+  font-size: 14px;
+  color: #1A202C;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.table-search-input:focus {
+  border-color: #2B6CB0;
+  box-shadow: 0 0 0 2px rgba(43, 108, 176, 0.1);
+}
+
+.table-search-input::placeholder {
+  color: #A0AEC0;
+}
+
+.table-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #A0AEC0;
+  font-size: 16px;
+}
+
+/* 表格筛选 */
+.table-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.table-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-filter-label {
+  font-size: 14px;
+  color: #2D3748;
+  white-space: nowrap;
+}
+
+.table-filter-select {
+  min-width: 120px;
+}
+
+/* 表格批量操作 */
+.table-batch-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background-color: #EBF8FF;
+  border-bottom: 1px solid #2B6CB0;
+}
+
+.table-batch-info {
+  font-size: 14px;
+  color: #2B6CB0;
+  font-weight: 500;
+}
+
+.table-batch-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 响应式表格 */
+@media (max-width: 991px) {
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .table-toolbar-left,
+  .table-toolbar-right {
+    justify-content: space-between;
+  }
+  
+  .table-search {
+    width: 100%;
+  }
+  
+  .table-filters {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 767px) {
+  .table th,
+  .table td {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .table-pagination {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .table-batch-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+}

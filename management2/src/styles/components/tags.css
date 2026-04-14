@@ -1,0 +1,389 @@
+/* ========================================
+   标签组件样式
+   状态标签、分类标签、可关闭标签等
+   ======================================== */
+
+/* 标签基础样式 */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 150ms ease;
+}
+
+/* 标签尺寸 */
+.tag-sm {
+  padding: 2px 6px;
+  font-size: 11px;
+  border-radius: 10px;
+}
+
+.tag-lg {
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 14px;
+}
+
+/* 默认标签 */
+.tag-default {
+  background-color: #EDF2F7;
+  color: #2D3748;
+  border-color: #E2E8F0;
+}
+
+.tag-default:hover {
+  background-color: #E2E8F0;
+  border-color: #CBD5E0;
+}
+
+/* 主要标签 */
+.tag-primary {
+  background-color: #EBF8FF;
+  color: #2B6CB0;
+  border-color: #2B6CB0;
+}
+
+.tag-primary:hover {
+  background-color: #D3EAFE;
+  color: #245A96;
+  border-color: #245A96;
+}
+
+/* 成功标签 */
+.tag-success {
+  background-color: #E6FFFA;
+  color: #276749;
+  border-color: #38A169;
+}
+
+.tag-success:hover {
+  background-color: #B3F5E8;
+  color: #22543D;
+  border-color: #2F855A;
+}
+
+/* 警告标签 */
+.tag-warning {
+  background-color: #FFF9DB;
+  color: #8B6D1F;
+  border-color: #D69E2E;
+}
+
+.tag-warning:hover {
+  background-color: #FEF5B7;
+  color: #744210;
+  border-color: #B7791F;
+}
+
+/* 危险标签 */
+.tag-danger {
+  background-color: #FFE8E6;
+  color: #9B2C2C;
+  border-color: #E53E3E;
+}
+
+.tag-danger:hover {
+  background-color: #FED7D7;
+  color: #742A2A;
+  border-color: #C53030;
+}
+
+/* 信息标签 */
+.tag-info {
+  background-color: #E6F4FF;
+  color: #2B6CB0;
+  border-color: #3182CE;
+}
+
+.tag-info:hover {
+  background-color: #CCE7FF;
+  color: #245A96;
+  border-color: #2C5AA0;
+}
+
+/* 实心标签 */
+.tag-solid {
+  border: none;
+  color: #FFFFFF;
+}
+
+.tag-solid.tag-primary {
+  background-color: #2B6CB0;
+}
+
+.tag-solid.tag-primary:hover {
+  background-color: #245A96;
+}
+
+.tag-solid.tag-success {
+  background-color: #38A169;
+}
+
+.tag-solid.tag-success:hover {
+  background-color: #2F855A;
+}
+
+.tag-solid.tag-warning {
+  background-color: #D69E2E;
+}
+
+.tag-solid.tag-warning:hover {
+  background-color: #B7791F;
+}
+
+.tag-solid.tag-danger {
+  background-color: #E53E3E;
+}
+
+.tag-solid.tag-danger:hover {
+  background-color: #C53030;
+}
+
+.tag-solid.tag-info {
+  background-color: #3182CE;
+}
+
+.tag-solid.tag-info:hover {
+  background-color: #2C5AA0;
+}
+
+/* 轮廓标签 */
+.tag-outline {
+  background-color: transparent;
+}
+
+.tag-outline.tag-primary {
+  color: #2B6CB0;
+  border-color: #2B6CB0;
+}
+
+.tag-outline.tag-primary:hover {
+  background-color: #EBF8FF;
+  color: #245A96;
+  border-color: #245A96;
+}
+
+.tag-outline.tag-success {
+  color: #38A169;
+  border-color: #38A169;
+}
+
+.tag-outline.tag-success:hover {
+  background-color: #E6FFFA;
+  color: #2F855A;
+  border-color: #2F855A;
+}
+
+.tag-outline.tag-warning {
+  color: #D69E2E;
+  border-color: #D69E2E;
+}
+
+.tag-outline.tag-warning:hover {
+  background-color: #FFF9DB;
+  color: #B7791F;
+  border-color: #B7791F;
+}
+
+.tag-outline.tag-danger {
+  color: #E53E3E;
+  border-color: #E53E3E;
+}
+
+.tag-outline.tag-danger:hover {
+  background-color: #FFE8E6;
+  color: #C53030;
+  border-color: #C53030;
+}
+
+.tag-outline.tag-info {
+  color: #3182CE;
+  border-color: #3182CE;
+}
+
+.tag-outline.tag-info:hover {
+  background-color: #E6F4FF;
+  color: #2C5AA0;
+  border-color: #2C5AA0;
+}
+
+/* 可关闭标签 */
+.tag-closable {
+  padding-right: 4px;
+}
+
+.tag-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  transition: background-color 150ms ease;
+}
+
+.tag-close:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.tag-solid .tag-close:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 带图标的标签 */
+.tag-icon {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 4px;
+  font-size: 12px;
+}
+
+.tag-sm .tag-icon {
+  font-size: 10px;
+  margin-right: 3px;
+}
+
+.tag-lg .tag-icon {
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+/* 带点的标签 */
+.tag-dot {
+  position: relative;
+  padding-left: 16px;
+}
+
+.tag-dot::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.tag-sm.tag-dot {
+  padding-left: 14px;
+}
+
+.tag-sm.tag-dot::before {
+  left: 6px;
+  width: 4px;
+  height: 4px;
+}
+
+.tag-lg.tag-dot {
+  padding-left: 20px;
+}
+
+.tag-lg.tag-dot::before {
+  left: 12px;
+  width: 8px;
+  height: 8px;
+}
+
+/* 标签组 */
+.tag-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.tag-group-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* 可选择标签 */
+.tag-selectable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.tag-selectable:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tag-selectable.is-selected {
+  background-color: #2B6CB0;
+  color: #FFFFFF;
+  border-color: #2B6CB0;
+}
+
+.tag-selectable.is-selected:hover {
+  background-color: #245A96;
+  border-color: #245A96;
+}
+
+/* 状态标签预设 */
+.status-active {
+  background-color: #E6FFFA;
+  color: #276749;
+  border-color: #38A169;
+}
+
+.status-inactive {
+  background-color: #EDF2F7;
+  color: #4A5568;
+  border-color: #CBD5E0;
+}
+
+.status-pending {
+  background-color: #FFF9DB;
+  color: #8B6D1F;
+  border-color: #D69E2E;
+}
+
+.status-error {
+  background-color: #FFE8E6;
+  color: #9B2C2C;
+  border-color: #E53E3E;
+}
+
+.status-processing {
+  background-color: #E6F4FF;
+  color: #2B6CB0;
+  border-color: #3182CE;
+}
+
+/* 响应式标签 */
+@media (max-width: 767px) {
+  .tag {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+  
+  .tag-sm {
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+  
+  .tag-lg {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+  
+  .tag-group {
+    gap: 4px;
+  }
+}
