@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify  # pyright: ignore[reportMissingImports]
 
 from backend.auth.routes import auth_bp
 from backend.common.bootstrap import ensure_database_ready
