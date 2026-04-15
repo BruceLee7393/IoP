@@ -8,6 +8,7 @@ from backend.commands import register_commands
 from backend.common.exceptions import ApiException
 from backend.config import config_by_name
 from backend.extensions import init_extensions
+from routes import role_bp, user_bp
 
 
 def _build_runtime_db_uri():
@@ -41,4 +42,6 @@ def create_app(config_name='dev'):
 
     register_commands(app)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(user_bp)
+    app.register_blueprint(role_bp)
     return app
