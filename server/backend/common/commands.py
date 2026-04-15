@@ -5,7 +5,8 @@ import pymysql
 from flask.cli import with_appcontext
 
 from backend.extensions import db
-from backend.models import Role, User
+from backend.role.model import Role
+from backend.user.model import User
 
 
 def _rebuild_database(target_db_name, db_host, db_port, db_user, db_password):
@@ -35,6 +36,7 @@ def _seed_in_fresh_app(target_db_name, db_host, db_port, db_user, db_password):
     os.environ['DB_USER'] = str(db_user)
     os.environ['DB_PASSWORD'] = str(db_password or '')
     os.environ['DB_NAME'] = str(target_db_name)
+    os.environ['AUTO_DB_BOOTSTRAP'] = '0'
 
     fresh_app = create_app(os.getenv('FLASK_CONFIG', 'dev'))
 

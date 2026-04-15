@@ -3,7 +3,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 
 from backend.extensions import db
-from backend.models import Role, User
+from backend.role.model import Role
+from backend.user.model import User
 
 user_bp = Blueprint('user', __name__, url_prefix='/api/users')
 

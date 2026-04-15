@@ -21,3 +21,8 @@ def login():
 
     token, user_info = auth_service.login(account, password)
     return jsonify({'code': 200, 'message': 'success', 'data': {'token': token, 'userInfo': user_info}}), 200
+
+
+@auth_bp.route('/logout', methods=['POST'])
+def logout():
+    return jsonify({'code': 200, 'message': 'success', 'data': None}), 200

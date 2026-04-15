@@ -1,32 +1,33 @@
 import os
-from urllib.parse import quote_plus
 
 from flask import Flask, jsonify
 
 from backend.auth.routes import auth_bp
-from backend.commands import register_commands
+from backend.common.bootstrap import ensure_database_ready
+from backend.common.commands import register_commands
 from backend.common.exceptions import ApiException
 from backend.config import config_by_name
 from backend.extensions import init_extensions
-from routes import role_bp, user_bp
+from backend.routes import role_bp, user_bp
 
 
-def _build_runtime_db_uri():
-    db_user = os.getenv('DB_USER', 'root')
-    db_password = quote_plus(os.getenv('DB_PASSWORD', ''))
-    db_host = os.getenv('DB_HOST', '127.0.0.1')
-    db_port = os.getenv('DB_PORT', '3306')
-    db_name = os.getenv('DB_NAME', 'IoP')
-    return f"mysql+pymysql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+def _import_all_models():
+    # Force import of all domain model modules so metadata is fully registered.
+    from backend.role import model as _role_model  # noqa: F401
+    from backend.user import model as _user_model  # noqa: F401
 
 
-def create_app(config_name='dev'):
+def create_app(config_name=None):
+    if not config_name:
+        config_name = os.getenv('FLASK_CONFIG', 'dev')
+
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
-    app.config['SQLALCHEMY_DATABASE_URI'] = _build_runtime_db_uri()
     app.config.setdefault('JWT_SECRET_KEY', app.config['SECRET_KEY'])
 
+    _import_all_models()
     init_extensions(app)
+    ensure_database_ready(app)
 
     @app.errorhandler(ApiException)
     def handle_api_exception(error):
