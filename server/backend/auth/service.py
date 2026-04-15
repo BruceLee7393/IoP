@@ -12,13 +12,13 @@ class AuthService:
         user = get_user_with_role_by_account(account)
 
         if not user:
-            raise AuthenticationError('账号或密码错误')
+            raise AuthenticationError('用户账号不存在。')
 
         if not user.verify_password(password):
-            raise AuthenticationError('账号或密码错误')
+            raise AuthenticationError('用户密码错误。')
 
         if user.status != 'active':
-            raise AuthenticationError('该账号已被禁用')
+            raise AuthenticationError('该用户账号已被禁用，无法登录。')
 
         access_token = create_access_token(
             identity=user.id,

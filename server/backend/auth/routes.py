@@ -1,8 +1,7 @@
-from flask import Blueprint, request
+from flask import Blueprint, jsonify, request
 
 from backend.auth.service import auth_service
 from backend.common.exceptions import InvalidUsageError
-from backend.common.response import success_response
 
 
 auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
@@ -21,4 +20,4 @@ def login():
         raise InvalidUsageError('用户账号和密码是必需的')
 
     token, user_info = auth_service.login(account, password)
-    return success_response({'token': token, 'userInfo': user_info})
+    return jsonify({'code': 200, 'message': 'success', 'data': {'token': token, 'userInfo': user_info}}), 200
