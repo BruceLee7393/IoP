@@ -1,5 +1,12 @@
 {
     "markdown.validate.enabled": true,
     "python-envs.defaultEnvManager": "ms-python.python:conda",
-    "python-envs.defaultPackageManager": "ms-python.python:conda"
+    "python-envs.defaultPackageManager": "ms-python.python:conda",
+    "python.defaultInterpreterPath": "/home/lee/miniconda3/envs/IoP/bin/python",
+    "chat.tools.terminal.autoApprove": {
+        "/^set -e\nconda run -n IoP python -c \"import sys, flask; print\\(sys\\.executable\\); print\\(flask\\.__version__\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
 }
