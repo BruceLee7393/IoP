@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from flask_jwt_extended import create_access_token, decode_token
 
 from backend.common.exceptions import AuthenticationError
-from backend.extensions import bcrypt, redis_client
+from backend.extensions import redis_client
 from backend.user.dao import get_user_with_role_by_account
 
 
@@ -14,7 +14,7 @@ class AuthService:
         if not user:
             raise AuthenticationError('账号或密码错误')
 
-        if not bcrypt.check_password_hash(user.password_hash, password):
+        if not user.verify_password(password):
             raise AuthenticationError('账号或密码错误')
 
         if user.status != 'active':
@@ -39,6 +39,7 @@ class AuthService:
             'account': user.account,
             'full_name': user.full_name,
             'role': user.role_id,
+            'role_name': user.role.role_name if user.role else None,
             'status': user.status,
         }
 
