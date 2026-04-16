@@ -4,7 +4,7 @@ from flask_jwt_extended import create_access_token, decode_token
 
 from backend.common.exceptions import AuthenticationError
 from backend.extensions import redis_client
-from backend.user.dao import get_user_with_role_by_account
+from backend.IoP_user.dao import get_user_with_role_by_account
 
 
 class AuthService:

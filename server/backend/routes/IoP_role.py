@@ -2,10 +2,10 @@ from flask import Blueprint, jsonify, request
 from sqlalchemy.exc import IntegrityError
 
 from backend.extensions import db
-from backend.role.model import Role, RoleMappingPermission
-from backend.user.model import User
+from backend.IoP_role.model import Role, RoleMappingPermission
+from backend.IoP_user.model import User
 
-role_bp = Blueprint('role', __name__, url_prefix='/api/roles')
+IoP_role_bp = Blueprint('IoP_role', __name__, url_prefix='/api/iop/role')
 
 
 def _role_to_dict(role):
@@ -29,7 +29,7 @@ def _error(message, status):
     return jsonify({'code': status, 'message': message, 'data': None}), status
 
 
-@role_bp.route('', methods=['POST'])
+@IoP_role_bp.route('', methods=['POST'])
 def create_role():
     payload = request.get_json(silent=True) or {}
 
@@ -69,7 +69,7 @@ def create_role():
     return _success(_role_to_dict(role), message='新增角色成功', status=201)
 
 
-@role_bp.route('', methods=['GET'])
+@IoP_role_bp.route('', methods=['GET'])
 def list_roles():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
@@ -120,7 +120,7 @@ def list_roles():
     )
 
 
-@role_bp.route('/<string:role_id>', methods=['GET'])
+@IoP_role_bp.route('/<string:role_id>', methods=['GET'])
 def get_role(role_id):
     role = Role.query.filter(Role.id == role_id).first()
     if not role:
@@ -128,7 +128,7 @@ def get_role(role_id):
     return _success(_role_to_dict(role), message='获取角色详情成功')
 
 
-@role_bp.route('/<string:role_id>', methods=['PUT', 'PATCH'])
+@IoP_role_bp.route('/<string:role_id>', methods=['PUT', 'PATCH'])
 def update_role(role_id):
     role = Role.query.filter(Role.id == role_id).first()
     if not role:
@@ -175,7 +175,7 @@ def update_role(role_id):
     return _success(_role_to_dict(role), message='更新角色成功')
 
 
-@role_bp.route('/<string:role_id>/status', methods=['PATCH'])
+@IoP_role_bp.route('/<string:role_id>/status', methods=['PATCH'])
 def toggle_role_status(role_id):
     role = Role.query.filter(Role.id == role_id).first()
     if not role:
@@ -196,7 +196,7 @@ def toggle_role_status(role_id):
     return _success(_role_to_dict(role), message='更新角色状态成功')
 
 
-@role_bp.route('/<string:role_id>', methods=['DELETE'])
+@IoP_role_bp.route('/<string:role_id>', methods=['DELETE'])
 def delete_role(role_id):
     role = Role.query.filter(Role.id == role_id).first()
     if not role:

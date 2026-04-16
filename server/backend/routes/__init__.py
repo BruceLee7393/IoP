@@ -1,4 +1,4 @@
-from backend.routes.role import role_bp
-from backend.routes.user import user_bp
+from backend.routes.IoP_role import IoP_role_bp
+from backend.routes.IoP_user import IoP_user_bp
 
-__all__ = ['user_bp', 'role_bp']
+__all__ = ['IoP_user_bp', 'IoP_role_bp']

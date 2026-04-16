@@ -4,10 +4,10 @@ from backend.auth.service import auth_service
 from backend.common.exceptions import InvalidUsageError
 
 
-auth_bp = Blueprint('auth', __name__, url_prefix='/api/auth')
+IoP_auth_bp = Blueprint('IoP_auth', __name__, url_prefix='/api/iop/auth')
 
 
-@auth_bp.route('/login', methods=['POST'])
+@IoP_auth_bp.route('/login', methods=['POST'])
 def login():
     payload = request.get_json(silent=True)
     if not payload:
@@ -23,6 +23,6 @@ def login():
     return jsonify({'code': 200, 'message': 'success', 'data': {'token': token, 'userInfo': user_info}}), 200
 
 
-@auth_bp.route('/logout', methods=['POST'])
+@IoP_auth_bp.route('/logout', methods=['POST'])
 def logout():
     return jsonify({'code': 200, 'message': 'success', 'data': None}), 200

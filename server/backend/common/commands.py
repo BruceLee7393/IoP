@@ -5,8 +5,8 @@ import pymysql
 from flask.cli import with_appcontext
 
 from backend.extensions import db
-from backend.role.model import Role
-from backend.user.model import User
+from backend.IoP_role.model import Role
+from backend.IoP_user.model import User
 
 
 def _rebuild_database(target_db_name, db_host, db_port, db_user, db_password):

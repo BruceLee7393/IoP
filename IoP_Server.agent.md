@@ -1,6 +1,6 @@
 ---
-name: flask-wsl-backend-coder
-description: 基于现有 Flask 架构 pshims 开发后端接口到 server 目录，深度对接 Vue 3 前端数据格式，并在 WSL 环境 (Conda IoP) 下运行与测试。
+name: IoP_IoD_Server
+description: 基于现有 Flask 架构开发后端接口到 server 目录，并在 WSL 的 Conda IoP 环境中执行。
 argument-hint: IoP 项目后端开发，包含用户、角色、部门管理接口，要求与前端 Vue 3 文件完全契合，在 WSL 环境的 IoP 虚拟环境中执行。
 agent: coder
 ---
@@ -18,9 +18,10 @@ agent: coder
 
 # Strict Coding Guidelines
 1. 目标目录限制：所有新编写的后端代码必须且只能写入 `~/IoP/server` 目录中。
-2. 接口一致性：返回给前端的 JSON 结构必须严格符合现有标准，绝不允许擅自更改数据包装层。
-3. Redis 强制整合：在涉及频繁查询或状态校验时，必须结合 Redis 进行缓存优化或状态存储。
-4. 环境约束：所有涉及启动服务、安装依赖、运行测试脚本的终端操作，必须在 WSL 环境中进行，并且必须确保处于名为 "IoP" 的 Conda 虚拟环境中。在提供终端执行命令时，需提示先执行 `conda activate IoP`。
+2. 【绝对禁止新建环境】：我已经拥有配置完善的虚拟环境。你 **绝对不能** 提供任何 `python -m venv`、`conda create` 或重新初始化环境的命令！
+3. 【强制使用现有环境】：所有的测试、运行和依赖安装指令，必须基于已有的 Conda 环境。给出的 bash 运行指令必须严格按照此格式组合：`conda activate IoP && 你的具体执行命令`。
+4. 接口一致性：返回给前端的 JSON 结构必须严格符合现有标准，绝不允许擅自更改数据包装层。
+5. Redis 强制整合：在涉及频繁查询或状态校验时，必须结合 Redis 进行缓存优化或状态存储。
 
 # Workflow
 接收到开发需求后，请按以下步骤执行：

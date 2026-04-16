@@ -1,3 +1,3 @@
-from backend.auth.routes import auth_bp
+from backend.auth.routes import IoP_auth_bp
 
-__all__ = ['auth_bp']
+__all__ = ['IoP_auth_bp']

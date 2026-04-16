@@ -3,10 +3,10 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import joinedload
 
 from backend.extensions import db
-from backend.role.model import Role
-from backend.user.model import User
+from backend.IoP_role.model import Role
+from backend.IoP_user.model import User
 
-user_bp = Blueprint('user', __name__, url_prefix='/api/users')
+IoP_user_bp = Blueprint('IoP_user', __name__, url_prefix='/api/iop/user')
 
 
 def _success(data, message='操作成功', status=200):
@@ -101,17 +101,17 @@ def _create_user_impl():
     return _success(None, message='新增用户成功', status=200)
 
 
-@user_bp.route('', methods=['POST'])
+@IoP_user_bp.route('', methods=['POST'])
 def create_user():
     return _create_user_impl()
 
 
-@user_bp.route('/register', methods=['POST'])
+@IoP_user_bp.route('/register', methods=['POST'])
 def create_user_register():
     return _create_user_impl()
 
 
-@user_bp.route('', methods=['GET'])
+@IoP_user_bp.route('', methods=['GET'])
 def list_users():
     page = request.args.get('page', 1, type=int)
     per_page = request.args.get('per_page', 10, type=int)
@@ -165,7 +165,7 @@ def list_users():
     )
 
 
-@user_bp.route('/<string:user_id>', methods=['GET'])
+@IoP_user_bp.route('/<string:user_id>', methods=['GET'])
 def get_user(user_id):
     user = User.query.options(joinedload(User.role)).filter(User.id == user_id).first()
     if not user:
@@ -173,7 +173,7 @@ def get_user(user_id):
     return _success(_user_to_dict(user), message='获取用户详情成功')
 
 
-@user_bp.route('/<string:user_id>', methods=['PUT', 'PATCH'])
+@IoP_user_bp.route('/<string:user_id>', methods=['PUT', 'PATCH'])
 def update_user(user_id):
     user = User.query.filter(User.id == user_id).first()
     if not user:
@@ -248,7 +248,7 @@ def update_user(user_id):
     return _success(_user_to_dict(user), message='更新用户成功')
 
 
-@user_bp.route('/<string:user_id>/status', methods=['PATCH'])
+@IoP_user_bp.route('/<string:user_id>/status', methods=['PATCH'])
 def toggle_user_status(user_id):
     user = User.query.filter(User.id == user_id).first()
     if not user:
@@ -270,7 +270,7 @@ def toggle_user_status(user_id):
     return _success(_user_to_dict(user), message='更新用户状态成功')
 
 
-@user_bp.route('/<string:user_id>/reset-password', methods=['PATCH'])
+@IoP_user_bp.route('/<string:user_id>/reset-password', methods=['PATCH'])
 def reset_password(user_id):
     user = User.query.filter(User.id == user_id).first()
     if not user:
@@ -292,7 +292,7 @@ def reset_password(user_id):
     return _success({'updated': True, 'user_id': user.id}, message='用户密码重置成功')
 
 
-@user_bp.route('/<string:user_id>/password-reset', methods=['POST'])
+@IoP_user_bp.route('/<string:user_id>/password-reset', methods=['POST'])
 def reset_password_compat(user_id):
     payload = request.get_json(silent=True) or {}
     if 'newPassword' in payload and 'password' not in payload:
@@ -316,7 +316,7 @@ def reset_password_compat(user_id):
     return _success({'updated': True, 'user_id': user.id}, message='用户密码重置成功')
 
 
-@user_bp.route('/<string:user_id>', methods=['DELETE'])
+@IoP_user_bp.route('/<string:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     user = User.query.filter(User.id == user_id).first()
     if not user:

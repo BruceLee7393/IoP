@@ -6,7 +6,7 @@ from sqlalchemy import inspect
 from sqlalchemy.engine.url import make_url
 
 from backend.extensions import db
-from backend.role.model import Role
+from backend.IoP_role.model import Role
 
 
 def _is_mysql_uri(db_uri):
