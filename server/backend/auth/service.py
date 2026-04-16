@@ -45,5 +45,16 @@ class AuthService:
 
         return access_token, user_info
 
+    def logout(self, user_id, jti, exp_ts, access_token):
+        now_ts = int(datetime.now(timezone.utc).timestamp())
+        ttl_seconds = max(int(exp_ts or 0) - now_ts, 1)
+
+        redis_client.delete(f'login_token:{jti}')
+        if user_id:
+            redis_client.delete(f'user_login_state:{user_id}')
+
+        # Keep revoked token marker until token natural expiration.
+        redis_client.setex(f'blacklisted_token:{jti}', ttl_seconds, access_token or 'revoked')
+
 
 auth_service = AuthService()

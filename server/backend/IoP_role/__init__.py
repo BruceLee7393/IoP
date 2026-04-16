@@ -1,3 +1,3 @@
-from backend.IoP_role.model import Permission, Role, RoleMappingPermission
+from backend.IoP_role.model import Role
 
-__all__ = ['Role', 'Permission', 'RoleMappingPermission']
+__all__ = ['Role']
