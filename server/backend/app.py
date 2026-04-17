@@ -2,6 +2,10 @@ import os
 
 from flask import Flask, jsonify  # pyright: ignore[reportMissingImports]
 
+from backend.IoD_dashboard.routes import IoD_dashboard_bp
+from backend.IoD_department.routes import IoD_department_bp
+from backend.IoD_role.routes import IoD_role_bp
+from backend.IoD_user.routes import IoD_user_bp
 from backend.IoP_mapping.routes import IoP_mapping_bp, IoP_mapping_compat_bp
 from backend.auth.routes import IoP_auth_bp, IoP_auth_compat_bp
 from backend.common.bootstrap import ensure_database_ready
@@ -14,6 +18,10 @@ from backend.routes import IoP_role_bp, IoP_role_compat_bp, IoP_user_bp, IoP_use
 
 def _import_all_models():
     # Force import of all domain model modules so metadata is fully registered.
+    from backend.IoD_department import model as _iod_department_model  # noqa: F401
+    from backend.IoD_mapping import model as _iod_mapping_model  # noqa: F401
+    from backend.IoD_role import model as _iod_role_model  # noqa: F401
+    from backend.IoD_user import model as _iod_user_model  # noqa: F401
     from backend.IoP_mapping import model as _mapping_model  # noqa: F401
     from backend.IoP_role import model as _role_model  # noqa: F401
     from backend.IoP_user import model as _user_model  # noqa: F401
@@ -36,8 +44,13 @@ def create_app(config_name=None):
         if not jti:
             return True
 
+        token_type = str((jwt_payload or {}).get('token_type') or (jwt_payload or {}).get('type') or '').strip()
+
         if redis_client.get(f'blacklisted_token:{jti}'):
             return True
+
+        if token_type == 'refresh':
+            return redis_client.get(f'refresh_token:{jti}') is None
 
         return redis_client.get(f'login_token:{jti}') is None
 
@@ -64,4 +77,8 @@ def create_app(config_name=None):
     app.register_blueprint(IoP_user_compat_bp)
     app.register_blueprint(IoP_role_bp)
     app.register_blueprint(IoP_role_compat_bp)
+    app.register_blueprint(IoD_dashboard_bp)
+    app.register_blueprint(IoD_role_bp)
+    app.register_blueprint(IoD_department_bp)
+    app.register_blueprint(IoD_user_bp)
     return app
