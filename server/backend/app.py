@@ -5,6 +5,8 @@ from flask import Flask, jsonify  # pyright: ignore[reportMissingImports]
 from backend.IoD_dashboard.routes import IoD_dashboard_bp
 from backend.IoD_department.routes import IoD_department_bp
 from backend.IoD_role.routes import IoD_role_bp
+from backend.IoD_upload.mqtt_consumer import init_upload_mqtt_listener
+from backend.IoD_upload.routes import IoD_upload_bp
 from backend.IoD_user.routes import IoD_user_bp
 from backend.IoP_mapping.routes import IoP_mapping_bp, IoP_mapping_compat_bp
 from backend.auth.routes import IoP_auth_bp, IoP_auth_compat_bp
@@ -12,7 +14,7 @@ from backend.common.bootstrap import ensure_database_ready
 from backend.common.commands import register_commands
 from backend.common.exceptions import ApiException
 from backend.config import config_by_name
-from backend.extensions import init_extensions, jwt, redis_client
+from backend.extensions import init_extensions, jwt, redis_client, socketio
 from backend.routes import (
     IoP_role_bp,
     IoP_role_compat_bp,
@@ -26,6 +28,7 @@ def _import_all_models():
     from backend.IoD_department import model as _iod_department_model  # noqa: F401
     from backend.IoD_mapping import model as _iod_mapping_model  # noqa: F401
     from backend.IoD_role import model as _iod_role_model  # noqa: F401
+    from backend.IoD_upload import model as _iod_upload_model  # noqa: F401
     from backend.IoD_user import model as _iod_user_model  # noqa: F401
     from backend.IoP_mapping import model as _mapping_model  # noqa: F401
     from backend.IoP_role import model as _role_model  # noqa: F401
@@ -42,6 +45,7 @@ def create_app(config_name=None):
 
     _import_all_models()
     init_extensions(app)
+    init_upload_mqtt_listener(app)
 
     @jwt.token_in_blocklist_loader
     def _is_token_revoked(_jwt_header, jwt_payload):
@@ -90,4 +94,13 @@ def create_app(config_name=None):
     app.register_blueprint(IoD_role_bp)
     app.register_blueprint(IoD_department_bp)
     app.register_blueprint(IoD_user_bp)
+    app.register_blueprint(IoD_upload_bp)
     return app
+
+
+if __name__ == "__main__":
+    app = create_app()
+    host = os.getenv("FLASK_RUN_HOST", "0.0.0.0")
+    port = int(os.getenv("FLASK_RUN_PORT", "5000"))
+    debug = os.getenv("FLASK_DEBUG", "0").strip().lower() in {"1", "true", "yes", "on"}
+    socketio.run(app, host=host, port=port, debug=debug)
