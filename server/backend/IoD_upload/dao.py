@@ -40,9 +40,35 @@ def _parse_event_time(raw_value):
         raise InvalidUsageError("event_time 格式错误，需为 ISO 时间格式") from exc
 
 
+def _parse_optional_datetime(raw_value, field_name):
+    if isinstance(raw_value, datetime):
+        return raw_value
+
+    value = str(raw_value or "").strip()
+    if not value:
+        return None
+
+    normalized = value.replace("Z", "+00:00")
+    try:
+        return datetime.fromisoformat(normalized)
+    except ValueError as exc:
+        raise InvalidUsageError(f"{field_name} 格式错误，需为 ISO 时间格式") from exc
+
+
 def insert_upload_record(payload):
     if not isinstance(payload, dict):
         raise InvalidUsageError("payload 必须是 JSON 对象")
+
+    # --- 核心：提取设备唯一ID并进行幂等性拦截 ---
+    msg_id = payload.get("msg_id")
+    if not msg_id:
+        raise InvalidUsageError("msg_id 是必填项，用于保证数据幂等性")
+
+    # 利用 SQLAlchemy 的 get 方法通过主键极速查重
+    existing = db.session.get(IoD_upload, msg_id)
+    if existing:
+        # 如果数据库中已存在该 msg_id，直接返回原有记录字典，放弃重复插入
+        return _upload_item_to_dict(existing)
 
     device_id = str(payload.get("device_id", "")).strip()
     if not device_id:
@@ -78,7 +104,9 @@ def insert_upload_record(payload):
 
     event_time = _parse_event_time(payload.get("event_time"))
 
+    # 创建实体对象，直接将 msg_id 赋值给主键 id
     entity = IoD_upload(
+        id=msg_id,
         device_id=device_id,
         event_type=event_type,
         event_record=event_record,
@@ -101,17 +129,52 @@ def get_upload_list(query_args):
     size = query_args.get("size", 10, type=int)
     device_id = query_args.get("device_id", type=str)
     upload_status = query_args.get("upload_status", type=int)
+    event_type = query_args.get("event_type", type=int)
+    event_time_start = _parse_optional_datetime(
+        query_args.get("event_time_start", type=str),
+        "event_time_start",
+    )
+    event_time_end = _parse_optional_datetime(
+        query_args.get("event_time_end", type=str),
+        "event_time_end",
+    )
+    last_upload_time_start = _parse_optional_datetime(
+        query_args.get("last_upload_time_start", type=str),
+        "last_upload_time_start",
+    )
+    last_upload_time_end = _parse_optional_datetime(
+        query_args.get("last_upload_time_end", type=str),
+        "last_upload_time_end",
+    )
 
     if page <= 0 or size <= 0:
         raise InvalidUsageError("page 和 size 必须大于 0")
     if upload_status is not None and upload_status not in {0, 1}:
         raise InvalidUsageError("upload_status 仅支持 0 或 1")
+    if event_time_start and event_time_end and event_time_start > event_time_end:
+        raise InvalidUsageError("event_time_start 不能晚于 event_time_end")
+    if (
+        last_upload_time_start
+        and last_upload_time_end
+        and last_upload_time_start > last_upload_time_end
+    ):
+        raise InvalidUsageError("last_upload_time_start 不能晚于 last_upload_time_end")
 
     query = IoD_upload.query
     if device_id:
         query = query.filter(IoD_upload.device_id == device_id)
     if upload_status is not None:
         query = query.filter(IoD_upload.upload_status == upload_status)
+    if event_type is not None:
+        query = query.filter(IoD_upload.event_type == event_type)
+    if event_time_start is not None:
+        query = query.filter(IoD_upload.event_time >= event_time_start)
+    if event_time_end is not None:
+        query = query.filter(IoD_upload.event_time <= event_time_end)
+    if last_upload_time_start is not None:
+        query = query.filter(IoD_upload.last_upload_time >= last_upload_time_start)
+    if last_upload_time_end is not None:
+        query = query.filter(IoD_upload.last_upload_time <= last_upload_time_end)
 
     paged = query.order_by(IoD_upload.event_time.desc()).paginate(
         page=page,

@@ -1,5 +1,7 @@
 import json
 import os
+import datetime
+from json import JSONDecodeError
 
 from paho.mqtt import client as mqtt_client
 
@@ -38,20 +40,98 @@ def init_upload_mqtt_listener(app):
 
     def on_message(_client, _userdata, msg):
         with app.app_context():
-            try:
-                payload_text = msg.payload.decode("utf-8")
-                payload = json.loads(payload_text)
-            except Exception as exc:
-                app.logger.exception("MQTT payload parse failed: %s", exc)
+            raw_payload = msg.payload or b""
+            payload_text = raw_payload.decode("utf-8", errors="replace").strip()
+
+            if not payload_text:
+                app.logger.warning(
+                    "MQTT empty payload ignored, topic=%s",
+                    msg.topic,
+                )
                 return
 
             try:
+                payload = json.loads(payload_text)
+            except JSONDecodeError as exc:
+                preview = payload_text[:160]
+                app.logger.warning(
+                    "MQTT non-JSON payload ignored, topic=%s, reason=%s, preview=%s",
+                    msg.topic,
+                    exc,
+                    preview,
+                )
+                return
+            except Exception as exc:
+                app.logger.warning(
+                    "MQTT payload decode failed, topic=%s, reason=%s", msg.topic, exc
+                )
+                return
+
+            if not isinstance(payload, dict):
+                app.logger.warning(
+                    "MQTT JSON payload is not object and ignored, topic=%s, type=%s",
+                    msg.topic,
+                    type(payload).__name__,
+                )
+                return
+
+            # --- 核心字段提取与校验 ---
+            msg_id = payload.get("msg_id")
+            device_id = str(payload.get("device_id", "")).strip()
+
+            if not msg_id or not device_id:
+                app.logger.error(
+                    "MQTT payload missing msg_id or device_id, ignored. topic=%s, preview=%s",
+                    msg.topic,
+                    payload_text[:160],
+                )
+                return
+
+            saved = None
+            ack_status = "OK"
+            ack_code = 0
+            ack_message = "db commit success"
+
+            # --- 存库尝试与幂等拦截 ---
+            try:
+                # 即使触发了幂等拦截，这里也会正常返回原有的数据对象
                 saved = insert_upload_record(payload)
             except Exception as exc:
                 app.logger.exception("Upload record persist failed: %s", exc)
-                return
+                ack_status = "FAIL"
+                ack_code = 500
+                ack_message = str(exc)[:200]
 
-            socketio.emit("new_upload_record", saved)
+            # --- 构造并下发业务 ACK 回执 ---
+            try:
+                server_time = (
+                    datetime.datetime.now(datetime.timezone.utc)
+                    .astimezone()
+                    .isoformat()
+                )
+
+                ack_payload = {
+                    "msg_id": msg_id,
+                    "status": ack_status,
+                    "code": ack_code,
+                    "message": ack_message,
+                    "server_time": server_time,
+                }
+
+                ack_topic = f"iod/device/down/{device_id}/ack"
+                _client.publish(ack_topic, json.dumps(ack_payload))
+                app.logger.info(
+                    "MQTT ACK published to topic: %s, msg_id: %s, status: %s",
+                    ack_topic,
+                    msg_id,
+                    ack_status,
+                )
+            except Exception as exc:
+                app.logger.exception("MQTT ACK publish failed: %s", exc)
+
+            # --- 触发前端实时渲染 ---
+            if saved:
+                socketio.emit("new_upload_record", saved)
 
     def on_disconnect(_client, _userdata, rc):
         app.logger.warning("MQTT disconnected, rc=%s", rc)
