@@ -13,7 +13,12 @@ from backend.common.commands import register_commands
 from backend.common.exceptions import ApiException
 from backend.config import config_by_name
 from backend.extensions import init_extensions, jwt, redis_client
-from backend.routes import IoP_role_bp, IoP_role_compat_bp, IoP_user_bp, IoP_user_compat_bp
+from backend.routes import (
+    IoP_role_bp,
+    IoP_role_compat_bp,
+    IoP_user_bp,
+    IoP_user_compat_bp,
+)
 
 
 def _import_all_models():
@@ -29,30 +34,34 @@ def _import_all_models():
 
 def create_app(config_name=None):
     if not config_name:
-        config_name = os.getenv('FLASK_CONFIG', 'dev')
+        config_name = os.getenv("FLASK_CONFIG", "dev")
 
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
-    app.config.setdefault('JWT_SECRET_KEY', app.config['SECRET_KEY'])
+    app.config.setdefault("JWT_SECRET_KEY", app.config["SECRET_KEY"])
 
     _import_all_models()
     init_extensions(app)
 
     @jwt.token_in_blocklist_loader
     def _is_token_revoked(_jwt_header, jwt_payload):
-        jti = str((jwt_payload or {}).get('jti', '')).strip()
+        jti = str((jwt_payload or {}).get("jti", "")).strip()
         if not jti:
             return True
 
-        token_type = str((jwt_payload or {}).get('token_type') or (jwt_payload or {}).get('type') or '').strip()
+        token_type = str(
+            (jwt_payload or {}).get("token_type")
+            or (jwt_payload or {}).get("type")
+            or ""
+        ).strip()
 
-        if redis_client.get(f'blacklisted_token:{jti}'):
+        if redis_client.get(f"blacklisted_token:{jti}"):
             return True
 
-        if token_type == 'refresh':
-            return redis_client.get(f'refresh_token:{jti}') is None
+        if token_type == "refresh":
+            return redis_client.get(f"refresh_token:{jti}") is None
 
-        return redis_client.get(f'login_token:{jti}') is None
+        return redis_client.get(f"login_token:{jti}") is None
 
     ensure_database_ready(app)
 
@@ -62,11 +71,11 @@ def create_app(config_name=None):
 
     @app.errorhandler(404)
     def handle_not_found(_error):
-        return jsonify({'code': 404, 'message': 'Not Found', 'data': None}), 404
+        return jsonify({"code": 404, "message": "Not Found", "data": None}), 404
 
     @app.errorhandler(500)
     def handle_server_error(_error):
-        return jsonify({'code': 500, 'message': '服务器内部错误', 'data': None}), 500
+        return jsonify({"code": 500, "message": "服务器内部错误", "data": None}), 500
 
     register_commands(app)
     app.register_blueprint(IoP_mapping_bp)
