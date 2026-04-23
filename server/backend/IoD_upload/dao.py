@@ -1,14 +1,14 @@
-from datetime import datetime
-
+from backend.common.datetime_utils import (
+    format_datetime_to_utc_z,
+    parse_to_utc_datetime,
+)
 from backend.common.exceptions import InvalidUsageError
 from backend.extensions import db
 from backend.IoD_upload.model import IoD_upload
 
 
 def _format_datetime(value):
-    if not value:
-        return None
-    return value.strftime("%Y-%m-%d %H:%M:%S")
+    return format_datetime_to_utc_z(value)
 
 
 def _upload_item_to_dict(item):
@@ -26,33 +26,11 @@ def _upload_item_to_dict(item):
 
 
 def _parse_event_time(raw_value):
-    if isinstance(raw_value, datetime):
-        return raw_value
-
-    value = str(raw_value or "").strip()
-    if not value:
-        raise InvalidUsageError("event_time 是必填项")
-
-    normalized = value.replace("Z", "+00:00")
-    try:
-        return datetime.fromisoformat(normalized)
-    except ValueError as exc:
-        raise InvalidUsageError("event_time 格式错误，需为 ISO 时间格式") from exc
+    return parse_to_utc_datetime(raw_value, "event_time", required=True)
 
 
 def _parse_optional_datetime(raw_value, field_name):
-    if isinstance(raw_value, datetime):
-        return raw_value
-
-    value = str(raw_value or "").strip()
-    if not value:
-        return None
-
-    normalized = value.replace("Z", "+00:00")
-    try:
-        return datetime.fromisoformat(normalized)
-    except ValueError as exc:
-        raise InvalidUsageError(f"{field_name} 格式错误，需为 ISO 时间格式") from exc
+    return parse_to_utc_datetime(raw_value, field_name, required=False)
 
 
 def insert_upload_record(payload):

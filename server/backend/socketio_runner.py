@@ -1,11 +1,10 @@
 import os
-
 import eventlet
 
 eventlet.monkey_patch()
 
-from backend.app import create_app
-from backend.extensions import socketio
+from backend.app import create_app  # noqa: E402
+from backend.extensions import socketio  # noqa: E402
 
 
 app = create_app()

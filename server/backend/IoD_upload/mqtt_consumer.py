@@ -5,6 +5,7 @@ from json import JSONDecodeError
 
 from paho.mqtt import client as mqtt_client
 
+from backend.common.datetime_utils import format_datetime_to_utc_z
 from backend.IoD_upload.dao import insert_upload_record
 from backend.extensions import socketio
 
@@ -104,10 +105,8 @@ def init_upload_mqtt_listener(app):
 
             # --- 构造并下发业务 ACK 回执 ---
             try:
-                server_time = (
+                server_time = format_datetime_to_utc_z(
                     datetime.datetime.now(datetime.timezone.utc)
-                    .astimezone()
-                    .isoformat()
                 )
 
                 ack_payload = {

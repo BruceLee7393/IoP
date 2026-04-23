@@ -36,10 +36,13 @@ def _import_all_models():
 
 
 def create_app(config_name=None):
+    # 判断开发模式
     if not config_name:
         config_name = os.getenv("FLASK_CONFIG", "dev")
-
+    # 创建 Flask 应用对象实例
+    # __name__ 代表当前模块的名字，Flask 会根据这个名字来确定应用的根目录，以便正确加载资源和模板
     app = Flask(__name__)
+    # 导入相应模式的配置
     app.config.from_object(config_by_name[config_name])
     app.config.setdefault("JWT_SECRET_KEY", app.config["SECRET_KEY"])
 
